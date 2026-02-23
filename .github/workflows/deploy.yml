@@ -12,6 +12,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
+    - name: Fix permissions on EC2
+      uses: easingthemes/ssh-deploy@main
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        REMOTE_HOST: ${{ secrets.EC2_HOST }}
+        REMOTE_USER: ${{ secrets.EC2_USER }}
+        SCRIPT_BEFORE: |
+          sudo chown -R ubuntu:ubuntu /var/www/html/ || true
+          sudo chmod -R 755 /var/www/html/ || true
+          rm -rf /var/www/html/* || true
+    
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@main
       env:
@@ -19,12 +30,9 @@ jobs:
         REMOTE_HOST: ${{ secrets.EC2_HOST }}
         REMOTE_USER: ${{ secrets.EC2_USER }}
         TARGET: /var/www/html/
-        SOURCE: "./"  # This will copy everything from your repo
-        EXCLUDE: ".git, .github, .gitignore"  # Exclude unnecessary files
-        ARGS: "-rltgoDzvO --delete"  # Delete files on server that don't exist in repo
-        SCRIPT_BEFORE: |
-          sudo mkdir -p /var/www/html/
-          sudo chown -R $REMOTE_USER:$REMOTE_USER /var/www/html/
+        SOURCE: "./"
+        EXCLUDE: ".git, .github, .gitignore"
+        ARGS: "-rltgoDzvO --delete"
         SCRIPT_AFTER: |
           sudo chown -R www-data:www-data /var/www/html/
           sudo chmod -R 755 /var/www/html/
