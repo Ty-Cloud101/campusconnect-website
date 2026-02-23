@@ -5,18 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampusConnect - Contact</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h2>Campus<span>Connect</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
     </nav>
+
     <main>
-        <h1>Contact Us</h1>
-        <p>Email: info@campusconnect.edu</p>
-        <p>Phone: (555) 123-4567</p>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Get in <span class="highlight">Touch</span></h1>
+                <p class="subtitle">We'd love to hear from you!</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>info@campusconnect.edu</p>
+                        <p>support@campusconnect.edu</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📞</div>
+                        <h3>Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                        <p>+1 (555) 765-4321</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📍</div>
+                        <h3>Address</h3>
+                        <p>123 University Ave</p>
+                        <p>San Francisco, CA 94105</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="deployment-info">
+            <div class="container">
+                <h2>📬 Send us a Message</h2>
+                <div class="info-card">
+                    <p>This contact page is deployed via CI/CD pipeline</p>
+                    <p>Every push to GitHub automatically updates this page!</p>
+                    <p class="timestamp">Last deployed: <span id="deploy-time"></span></p>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 CampusConnect - DevOps Assignment</p>
+            <p>Built with ❤️ using GitHub Actions & AWS EC2</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('deploy-time').textContent = new Date().toLocaleString();
+    </script>
 </body>
 </html>
